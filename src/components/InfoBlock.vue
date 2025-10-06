@@ -7,7 +7,7 @@
 </script>
 
 <template>
-  <img class="width=" :src="imageUrl" alt="info">
+  <img height="70" width="70" :src="imageUrl" alt="info">
   <h2>{{ title }}</h2>
   <p>{{ description }}</p>
 </template>
