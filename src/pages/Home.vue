@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 	import { inject, reactive, watch, ref, onMounted } from 'vue';
-	import CardList from '../components/CardList.vue';
+	import CardList from '@/components/CardList.vue';
 	import axios from 'axios';
 
 	const items = ref([])
@@ -35,7 +35,7 @@
 
 				item.isFavorite = true
 				const obj = {
-					parentId: item.id
+					item_id: item.id,
 				}
 				const {data} = await axios.post('https://595d54c558fafcda.mokky.dev/favorites', obj)
 				
@@ -78,7 +78,7 @@
 		try {
 			const {data} = await axios.get('https://595d54c558fafcda.mokky.dev/favorites');
 			items.value = items.value.map(item => {
-				const favorite = data.find(favorite => favorite.parentId === item.id)
+				const favorite = data.find(favorite => favorite.item_id === item.id)
 				if (!favorite){
 					return item;
 				}
@@ -97,7 +97,7 @@
 		
 		const localCart = localStorage.getItem('cart')
 		cart.value = localCart ? JSON.parse(localCart) : []
-
+		
 		await fetchItems();
 		await fetchFavorites();
 
