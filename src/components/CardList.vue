@@ -10,7 +10,7 @@
 
 
 <template>
-	<div class="grid grid-cols-4 gap-5">
+	<div class="grid grid-cols-4 gap-5" v-auto-animate>
 		<VueCard 
 			v-for="item in items"
 			:key="item.id"
