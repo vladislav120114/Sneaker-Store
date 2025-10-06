@@ -8,7 +8,7 @@
 
 	onMounted(async () => {
 		try {
-			const {data} = await axios.get('https://595d54c558fafcda.mokky.dev/favorites?_relations=items')
+			const {data} = await axios.get('YOUR-API-LINK')
 
 			favorites.value = data.map(obj => obj.item)
 		} catch (e) {
