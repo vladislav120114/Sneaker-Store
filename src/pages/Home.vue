@@ -37,15 +37,15 @@
 				const obj = {
 					item_id: item.id,
 				}
-				const {data} = await axios.post('https://595d54c558fafcda.mokky.dev/favorites', obj)
-				
+				const {data} = await axios.post('YOUR-API-LINK', obj)
+
 				item.favoriteId = data.id
 			} else {
 				item.isFavorite = false
-				await axios.delete(`https://595d54c558fafcda.mokky.dev/favorites/${item.favoriteId}`)
+				await axios.delete(`YOUR-API-LINK`)
 				item.favoriteId = null
 			}
-			
+
 		} catch (e) {
 			console.log(e)
 		}
@@ -61,7 +61,7 @@
 				params.title = `*${filters.searchQuery}`;
 			}
 
-			const {data} = await axios.get('https://595d54c558fafcda.mokky.dev/items', {params});
+			const {data} = await axios.get('YOUR-API-LINK', {params});
 			items.value = data.map(obj => ({
 				...obj,
 				isFavorite: false,
@@ -76,7 +76,7 @@
 
 	const fetchFavorites = async () => {
 		try {
-			const {data} = await axios.get('https://595d54c558fafcda.mokky.dev/favorites');
+			const {data} = await axios.get('YOUR-API-LINK');
 			items.value = items.value.map(item => {
 				const favorite = data.find(favorite => favorite.item_id === item.id)
 				if (!favorite){
@@ -94,7 +94,7 @@
 	}
 
 	onMounted(async () => {
-		
+
 		const localCart = localStorage.getItem('cart')
 		cart.value = localCart ? JSON.parse(localCart) : []
 
@@ -132,7 +132,7 @@
 				<img src="/search.svg" alt="search" class="absolute left-4 top-3"/>
 				<input
 					@change="onChangeInput"
-					class="border border-gray-200 rounded-md py-2 pl-10 pr-4 outline-none transition focus:border-gray-400" 
+					class="border border-gray-200 rounded-md py-2 pl-10 pr-4 outline-none transition focus:border-gray-400"
 					type="text"
 					placeholder="Поиск..."
 				/>
